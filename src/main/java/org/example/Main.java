@@ -1,70 +1,37 @@
 package org.example;
-
+import java.util.*;
 
 //TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
 // click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
 public class Main {
     public static void main(String[] args) {
-        DFS dfs = new DFS();
-        BFS bfs = new BFS();
+        Dijkstra_algorithm da = new Dijkstra_algorithm();
 
-        dfs.addEdge('A', 'C');
-        dfs.addEdge('A', 'B');
-        dfs.addEdge('A', 'D');
+        da.addEdge("Edinburgh", "Perth", 100);
+        da.addEdge("Edinburgh", "Stirling", 50);
+        da.addEdge("Edinburgh", "Glasgow", 70);
 
-        dfs.addEdge('B', 'A');
-        dfs.addEdge('B', 'C');
-        dfs.addEdge('B', 'E');
-        dfs.addEdge('B', 'G');
+        da.addEdge("Glasgow", "Stirling", 50);
+        da.addEdge("Glasgow", "Edinburgh", 70);
 
-        dfs.addEdge('C', 'A');
-        dfs.addEdge('C', 'B');
-        dfs.addEdge('C', 'D');
-
-        dfs.addEdge('D', 'C');
-        dfs.addEdge('D', 'A');
-
-        dfs.addEdge('E', 'G');
-        dfs.addEdge('E', 'F');
-        dfs.addEdge('E', 'B');
-
-        dfs.addEdge('F', 'G');
-        dfs.addEdge('F', 'E');
-
-        dfs.addEdge('G', 'F');
-        dfs.addEdge('G', 'B');
+        da.addEdge("Stirling", "Perth", 40);
+        da.addEdge("Stirling", "Edinburgh", 50);
+        da.addEdge("Stirling", "Glasgow", 50);
 
 
+        da.addEdge("Perth", "Dundee", 60);
+        da.addEdge("Perth", "Edinburgh", 100);
+        da.addEdge("Perth", "Stirling", 40);
 
-        bfs.addEdge('A', 'C');
-        bfs.addEdge('A', 'B');
-        bfs.addEdge('A', 'D');
+        da.addEdge("Dundee", "Perth", 60);
 
-        bfs.addEdge('B', 'A');
-        bfs.addEdge('B', 'C');
-        bfs.addEdge('B', 'E');
-        bfs.addEdge('B', 'G');
+        String start = "Edinburgh";
+        String end = "Dundee";
+        Map<String, Integer> distances = da.dijkstra(start);
+        List<String> path = da.getShortestPath(start, end, distances);
 
-        bfs.addEdge('C', 'A');
-        bfs.addEdge('C', 'B');
-        bfs.addEdge('C', 'D');
+        System.out.println("Shortest path from " + start + " to " + end + ": " + path);
+        System.out.println(distances.get(end));
 
-        bfs.addEdge('D', 'C');
-        bfs.addEdge('D', 'A');
-
-        bfs.addEdge('E', 'G');
-        bfs.addEdge('E', 'F');
-        bfs.addEdge('E', 'B');
-
-        bfs.addEdge('F', 'G');
-        bfs.addEdge('F', 'E');
-
-        bfs.addEdge('G', 'F');
-        bfs.addEdge('G', 'B');
-
-
-        dfs.dfs('A');
-        System.out.println();
-        bfs.bfs('A');
     }
 }
